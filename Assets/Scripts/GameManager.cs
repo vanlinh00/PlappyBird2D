@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
-    public int _mark = 0;
+    public int _currentMark = 0;
+
+    private int _maxMark = 0;
 
     void Start()
     {
@@ -23,16 +25,29 @@ public class GameManager : Singleton<GameManager>
     }
     public void CountMark()
     {
-        _mark += 1;
+        _currentMark += 1;
     }
-
     public void SetMark()
     {
-        _mark = 0;
+        _currentMark = 0;
     }
-    public int GetMark()
+    public int GetCurrentMark()
     {
-        return _mark;
-    }    
+        return _currentMark;
+    }
+    public int GetMaxMark()
+    {
+        _maxMark = PlayerPrefs.GetInt("maxMark", 0);
+        return _maxMark;
+    }
 
+    public void SetMaxMark( int Value)
+    {
+        _maxMark = PlayerPrefs.GetInt("maxMark", 0);
+        if (Value > _maxMark)
+        {
+            PlayerPrefs.SetInt("maxMark", Value);
+        }    
+      
+    }
 }

@@ -1,22 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PanelGameOver : MonoBehaviour
 {
-    // [SerializeField] GameObject 
-    /*
-    [SerializeField] Text _core;
-    [SerializeField] Button _playGameBt;
+
+    [SerializeField] Text _currentMark;
+    [SerializeField] Text _maxMark;
     private void Awake()
     {
-        _core.text = GameManager._instance.GetMark().ToString();
-        _playGameBt.onClick.AddListener(PlayGame);
+        _currentMark.text = GameManager._instance.GetCurrentMark().ToString();
+        _maxMark.text = (GameManager._instance.GetCurrentMark()>GameManager._instance.GetMaxMark())? GameManager._instance.GetCurrentMark().ToString(): GameManager._instance.GetMaxMark().ToString();
     }
-    void PlayGame()
-    {
-        SceneManager.LoadScene("Main");
-    }
-    */
 
 }

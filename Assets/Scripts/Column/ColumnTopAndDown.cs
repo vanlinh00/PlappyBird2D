@@ -9,8 +9,9 @@ public class ColumnTopAndDown : MonoBehaviour
         if(collision.gameObject.tag.Equals("Player"))
         {
             UiController._instance.GameOver();
-        }    
+        }
     }
+
 
 }
 

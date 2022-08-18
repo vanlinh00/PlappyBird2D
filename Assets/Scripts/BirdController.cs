@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SoundController;
 
 public class BirdController : Singleton<BirdController>
 {
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private float _angleRotation;
-    [SerializeField] private float _testAngle;
+
+    [SerializeField] Animator _animator;
 
     public  bool _isPlayGame = false;
     private void Awake()
@@ -17,6 +19,7 @@ public class BirdController : Singleton<BirdController>
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
 private void Update()
@@ -27,15 +30,12 @@ private void Update()
             if (WasTouchedOrClicked())
             {
                 // _rb.AddForce(new Vector2(0, _jumpSpeed), ForceMode2D.Impulse);
-                GetComponent<Rigidbody2D>().velocity = new Vector2(_rb.velocity.x, _jumpSpeed);
+                SoundController._instance.OnPlayAudio(SoundType.fly);
+                _rb.velocity = new Vector2(_rb.velocity.x, _jumpSpeed);
             }
             Rotation();
         }
-        else
-        {
-
-        }
-
+      
     }
  
    void Rotation()
@@ -64,9 +64,17 @@ private void Update()
         else
             return false;
     }
-
     public void ChangeBodyTypeToDynamic()
     {
         _rb.bodyType = RigidbodyType2D.Dynamic;
     }
+    public void Die()
+    {
+        _animator.SetBool("Die", true);
+        _rb.GetComponent<BoxCollider2D>().isTrigger = true;
+        transform.rotation = Quaternion.Euler(0, 0, -90);
+        _isPlayGame = false;
+        //_rb.velocity = new Vector2(_rb.velocity.x, -0.65f);
+        //_rb.velocity = new Vector2(transform.position.x, -0.65f);
+    }    
 }
