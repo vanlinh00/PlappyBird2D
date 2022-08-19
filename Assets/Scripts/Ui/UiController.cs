@@ -18,7 +18,7 @@ public class UiController : Singleton<UiController>
     // PanelGameOver
     [SerializeField] GameObject _gameOverPanel;
     [SerializeField] GameObject _gameOverTxt;
-    [SerializeField] GameObject _medal;
+    [SerializeField] GameObject _panelNotice;
 
 
     [SerializeField] GameObject _allButton;
@@ -47,7 +47,7 @@ public class UiController : Singleton<UiController>
     {
         SoundController._instance.OnPlayAudio(SoundType.death);
         GameManager._instance.SetMaxMark(GameManager._instance.GetCurrentMark());
-        ChangeMoveSpeed();
+        PauseGame();
         BirdController._instance.Die();
         StartCoroutine(SetActivePanelGameOver());
     }
@@ -56,19 +56,19 @@ public class UiController : Singleton<UiController>
         yield return new WaitForSeconds(1f);
 
         _gameOverPanel.SetActive(true);
-
         _gameOverTxt.SetActive(true);
-       // yield return new WaitForSeconds(0.1f);
+
+         yield return new WaitForSeconds(0.1f);
         _gameOverTxt.GetComponent<Animator>().SetBool("Idle", true);
 
-        _medal.SetActive(true);
+        _panelNotice.SetActive(true);
         yield return new WaitForSeconds(0.65f);
-        _medal.GetComponent<Animator>().SetBool("Idle", true);
+        _panelNotice.GetComponent<Animator>().SetBool("Idle", true);
 
         yield return new WaitForSeconds(0.5f);
         _allButton.SetActive(true);
     }
-    void ChangeMoveSpeed()
+    void PauseGame()
     {
         _columns.GetComponent<Move>()._speed = 0f;
         _allWall.GetComponent<Move>()._speed = 0f;

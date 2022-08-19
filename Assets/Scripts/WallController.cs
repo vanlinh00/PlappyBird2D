@@ -5,9 +5,9 @@ using UnityEngine;
 public class WallController : MonoBehaviour
 {
     private float _disXwall = 4.67f;
-    void Start()
+    private void Start()
     {
-        for(int i=0;i<300;i++)
+        for(int i=0;i<100;i++)
         {
             BornWall();
         }    
@@ -19,4 +19,5 @@ public class WallController : MonoBehaviour
         GameObject newWall = Instantiate(Resources.Load("Wall", typeof(GameObject)), newPosChild, Quaternion.identity) as GameObject;
         newWall.transform.parent = this.transform;
     }    
+
 }

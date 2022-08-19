@@ -41,12 +41,12 @@ public class GameManager : Singleton<GameManager>
         return _maxMark;
     }
 
-    public void SetMaxMark( int Value)
+    public void SetMaxMark( int CourrentMax)
     {
         _maxMark = PlayerPrefs.GetInt("maxMark", 0);
-        if (Value > _maxMark)
+        if (CourrentMax > _maxMark)
         {
-            PlayerPrefs.SetInt("maxMark", Value);
+            PlayerPrefs.SetInt("maxMark", CourrentMax);
         }    
       
     }

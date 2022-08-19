@@ -11,7 +11,5 @@ public class ColumnTopAndDown : MonoBehaviour
             UiController._instance.GameOver();
         }
     }
-
-
 }
 
